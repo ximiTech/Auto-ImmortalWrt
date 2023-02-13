@@ -28,7 +28,10 @@ sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=5.15/g" target/linux/x86/Makefile
 # sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/passwall_packages/xray-plugin/Makefile
 
 ########### 替换immortal的内置的openclash版本 ###########
-rm -rf feeds/luci/applications/luci-app-openclash
-wget -P feeds/luci/applications https://github.com/ximiTech/intelligentclicker/raw/main/luci-app-openclash.zip
-unzip -q -d feeds/luci/applications feeds/luci/applications/luci-app-openclash.zip
-rm feeds/luci/applications/luci-app-openclash.zip
+sed -i 's/\r$//g' feeds/luci/applications/luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
+sed -i 's/clashversion_check();/\/\/&/g' feeds/luci/applications/luci-app-openclash/luasrc/view/openclash/status.htm
+
+# rm -rf feeds/luci/applications/luci-app-openclash
+# wget -P feeds/luci/applications https://github.com/ximiTech/intelligentclicker/raw/main/luci-app-openclash.zip
+# unzip -q -d feeds/luci/applications feeds/luci/applications/luci-app-openclash.zip
+# rm feeds/luci/applications/luci-app-openclash.zip
