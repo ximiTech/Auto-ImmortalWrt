@@ -68,13 +68,20 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH --single-branch openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
+    - name: luci-app-homeproxy install
+      run: |
+        cd openwrt
+        mkdir package/emortal/luci-app-homeproxy
+        cd package/emortal/luci-app-homeproxy
+        git clone https://github.com/immortalwrt/homeproxy.git
+
     - name: luci-app-poweroff install
       run: |
         cd openwrt
         mkdir package/emortal/luci-app-poweroff
         cd package/emortal/luci-app-poweroff
         git clone https://github.com/ximiTech/luci-app-poweroff.git
-       
+
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
