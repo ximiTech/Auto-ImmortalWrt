@@ -28,6 +28,6 @@ jobs:
         echo "status=success" >> $GITHUB_OUTPUT
         
     - name: Check the value
-      if: steps.test1.outputs.status == 'success'
+      if: steps.test1.outputs.status == 'success' && !cancelled()
       run: |
         echo "okkkkk"
