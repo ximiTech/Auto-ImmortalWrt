@@ -185,7 +185,7 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: ${{ env.FIRMWARE }}/*
         tag: ${{ steps.tag.outputs.release_tag }}
-        file_glob: false
+        file_glob: true
           
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
