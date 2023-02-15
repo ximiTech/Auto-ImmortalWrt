@@ -42,6 +42,7 @@ sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclas
 sed -i 's/ForceDnsMapping/force-dns-mapping/g' luci-app-openclash/root/usr/share/openclash/yml_change.sh
 sed -i 's/ParsePureIp/parse-pure-ip/g' luci-app-openclash/root/usr/share/openclash/yml_change.sh
 sed -i 's/0.45.84/0.68.86/g' luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
+rm -rf .git/
 cd ../../..
 
 # sed -i 's/\r$//g' feeds/luci/applications/luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
