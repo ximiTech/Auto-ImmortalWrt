@@ -182,7 +182,16 @@ jobs:
         [ $UPLOAD_COWTRANSFER = true ] && echo "🔗 [Cowtransfer](${{ steps.cowtransfer.outputs.url }})" >> release.txt
         [ $UPLOAD_WETRANSFER = true ] && echo "🔗 [WeTransfer](${{ steps.wetransfer.outputs.url }})" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
-         
+
+    - name: Upload firmware to release
+      uses: svenstaro/upload-release-action@v2
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ${{ env.FIRMWARE }}/*
+        tag: ${{ steps.tag.outputs.release_tag }}
+        file_glob: true
+          
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
