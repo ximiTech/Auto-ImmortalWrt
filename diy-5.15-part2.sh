@@ -28,8 +28,24 @@ sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=5.15/g" target/linux/x86/Makefile
 # sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/passwall_packages/xray-plugin/Makefile
 
 ########### 替换immortal的内置的openclash版本 ###########
-sed -i 's/\r$//g' feeds/luci/applications/luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
-sed -i 's/clashversion_check();/\/\/&/g' feeds/luci/applications/luci-app-openclash/luasrc/view/openclash/status.htm
+rm -rf feeds/luci/applications/luci-app-openclash
+cd feeds/luci/applications
+git init
+git remote add -f origin https://github.com/vernesong/OpenClash.git
+git config core.sparsecheckout true
+echo "luci-app-openclash" >> .git/info/sparse-checkout
+git pull --depth 1 origin dev
+git branch --set-upstream-to=origin/dev
+git reset --hard 707d81813350bd5748de9391da55351f38df1f26
+sed -i 's/\r$//g' luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
+sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
+sed -i 's/ForceDnsMapping/force-dns-mapping/g' luci-app-openclash/root/usr/share/openclash/yml_change.sh
+sed -i 's/ParsePureIp/parse-pure-ip/g' luci-app-openclash/root/usr/share/openclash/yml_change.sh
+sed -i 's/0.45.84/0.68.86/g' luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
+cd ../../..
+
+# sed -i 's/\r$//g' feeds/luci/applications/luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
+# sed -i 's/clashversion_check();/\/\/&/g' feeds/luci/applications/luci-app-openclash/luasrc/view/openclash/status.htm
 
 # rm -rf feeds/luci/applications/luci-app-openclash
 # wget -P feeds/luci/applications https://github.com/ximiTech/intelligentclicker/raw/main/luci-app-openclash.zip
