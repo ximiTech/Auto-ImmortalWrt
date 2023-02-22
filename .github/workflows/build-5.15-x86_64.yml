@@ -68,12 +68,6 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH --single-branch openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: luci-app-homeproxy install
-      run: |
-        cd openwrt
-        cd package/emortal
-        git clone https://github.com/immortalwrt/homeproxy.git luci-app-homeproxy
-
     - name: luci-app-poweroff install
       run: |
         cd openwrt
