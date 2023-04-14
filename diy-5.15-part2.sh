@@ -27,27 +27,38 @@ sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=5.15/g" target/linux/x86/Makefile
 # sed -i 's/PKG_RELEASE:=.*/PKG_RELEASE:=1/g' feeds/passwall_packages/xray-plugin/Makefile
 # sed -i 's/PKG_HASH:=.*/PKG_HASH:=skip/g' feeds/passwall_packages/xray-plugin/Makefile
 
-########### 替换immortal的内置的openclash版本 ###########
-rm -rf feeds/luci/applications/luci-app-openclash
-wget -P feeds/luci/applications https://github.com/ximiTech/intelligentclicker/raw/main/luci-app-openclash.zip
-unzip -q -d feeds/luci/applications feeds/luci/applications/luci-app-openclash.zip
-rm feeds/luci/applications/luci-app-openclash.zip
+########### 替换immortal的内置的smartdns版本 ###########
+cd feeds/packages/net
+rm -rf smartdns/
+svn co https://github.com/coolsnowwolf/packages/trunk/net/smartdns smartdns/
+# sed -i 's/1.2022.38/1.2023.41/g' smartdns/Makefile
+sed -i 's/PKG_SOURCE_VERSION:=.*/PKG_SOURCE_VERSION:=0947a8dcabdd48f7cabd05a336a3eb7d4510f605/g' smartdns/Makefile
+sed -i 's/PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=skip/g' smartdns/Makefile
+cd cd ../../..
 
-# cd feeds/luci/applications
-# git init
-# git remote add -f origin https://github.com/vernesong/OpenClash.git
-# git config core.sparsecheckout true
-# echo "luci-app-openclash" >> .git/info/sparse-checkout
-# git pull --depth 1 origin dev
-# git branch --set-upstream-to=origin/dev
-# git reset --hard 707d81813350bd5748de9391da55351f38df1f26
+########### 替换immortal的内置的openclash版本 ###########
+cd feeds/luci/applications
+rm -rf luci-app-openclash/
+git init
+git remote add -f origin https://github.com/vernesong/OpenClash.git
+git config core.sparsecheckout true
+echo "luci-app-openclash" >> .git/info/sparse-checkout
+git pull --depth 1 origin dev
+git branch --set-upstream-to=origin/dev
+git reset --hard 4564a7fe49657c08266f786d1c1421839b6797a1
+sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
+rm -rf .git/
+cd ../../..
+
 # sed -i 's/\r$//g' luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
 # sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
 # sed -i 's/ForceDnsMapping/force-dns-mapping/g' luci-app-openclash/root/usr/share/openclash/yml_change.sh
 # sed -i 's/ParsePureIp/parse-pure-ip/g' luci-app-openclash/root/usr/share/openclash/yml_change.sh
 # sed -i 's/0.45.84/0.68.86/g' luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
-# rm -rf .git/
-# cd ../../..
+
+# wget -P feeds/luci/applications https://github.com/ximiTech/intelligentclicker/raw/main/luci-app-openclash.zip
+# unzip -q -d feeds/luci/applications feeds/luci/applications/luci-app-openclash.zip
+# rm feeds/luci/applications/luci-app-openclash.zip
 
 # sed -i 's/\r$//g' feeds/luci/applications/luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
 # sed -i 's/clashversion_check();/\/\/&/g' feeds/luci/applications/luci-app-openclash/luasrc/view/openclash/status.htm
