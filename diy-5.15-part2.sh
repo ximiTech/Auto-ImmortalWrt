@@ -36,8 +36,8 @@ sed -i 's/PKG_SOURCE_VERSION:=.*/PKG_SOURCE_VERSION:=0947a8dcabdd48f7cabd05a336a
 sed -i 's/PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=skip/g' smartdns/Makefile
 cd ../../..
 
-########### 替换immortal的内置的openclash版本 ###########
 cd feeds/luci/applications
+########### 替换immortal的内置的openclash版本 ###########
 rm -rf luci-app-openclash/
 git init
 git remote add -f origin https://github.com/vernesong/OpenClash.git
@@ -48,6 +48,16 @@ git branch --set-upstream-to=origin/dev
 git reset --hard 4564a7fe49657c08266f786d1c1421839b6797a1
 sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
 rm -rf .git/
+rm -rf .github/
+
+rm -rf luci-app-passwall/
+svn co https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall luci-app-passwall/
+
+rm -rf luci-app-unblockneteasemusic/
+git clone -b js https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git luci-app-unblockneteasemusic
+rm -rf luci-app-unblockneteasemusic/.git/
+rm -rf luci-app-unblockneteasemusic/.github/
+
 cd ../../..
 
 # sed -i 's/\r$//g' luci-app-openclash/root/etc/openclash/custom/openclash_custom_firewall_rules.sh
