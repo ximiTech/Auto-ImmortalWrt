@@ -37,6 +37,7 @@ sed -i 's/PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=skip/g' smartdns/Makefile
 cd ../../..
 
 cd feeds/luci/applications
+
 ########### 替换immortal的内置的openclash版本 ###########
 rm -rf luci-app-openclash/
 git init
@@ -53,6 +54,7 @@ rm -rf .github/
 ########### 替换immortal的内置的passwall版本 ###########
 rm -rf luci-app-passwall/
 svn co https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall luci-app-passwall/
+rm -rf luci-app-passwall/.svn/
 
 ########### 替换immortal的内置的unblockneteasemusic版本 ###########
 rm -rf luci-app-unblockneteasemusic/
