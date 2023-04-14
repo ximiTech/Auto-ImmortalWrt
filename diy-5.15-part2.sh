@@ -50,9 +50,11 @@ sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclas
 rm -rf .git/
 rm -rf .github/
 
+########### 替换immortal的内置的passwall版本 ###########
 rm -rf luci-app-passwall/
 svn co https://github.com/xiaorouji/openwrt-passwall/branches/luci/luci-app-passwall luci-app-passwall/
 
+########### 替换immortal的内置的unblockneteasemusic版本 ###########
 rm -rf luci-app-unblockneteasemusic/
 git clone -b js https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic.git luci-app-unblockneteasemusic
 rm -rf luci-app-unblockneteasemusic/.git/
