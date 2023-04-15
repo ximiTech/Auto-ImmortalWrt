@@ -31,6 +31,7 @@ sed -i "s/KERNEL_PATCHVER:=.*/KERNEL_PATCHVER:=5.15/g" target/linux/x86/Makefile
 cd feeds/packages/net
 rm -rf smartdns/
 svn co https://github.com/coolsnowwolf/packages/trunk/net/smartdns smartdns/
+rm -rf smartdns/.svn/
 # sed -i 's/1.2022.38/1.2023.41/g' smartdns/Makefile
 sed -i 's/PKG_SOURCE_VERSION:=.*/PKG_SOURCE_VERSION:=0947a8dcabdd48f7cabd05a336a3eb7d4510f605/g' smartdns/Makefile
 sed -i 's/PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=skip/g' smartdns/Makefile
