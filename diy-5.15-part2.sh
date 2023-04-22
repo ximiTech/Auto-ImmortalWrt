@@ -49,6 +49,8 @@ git pull --depth 1 origin dev
 git branch --set-upstream-to=origin/dev
 git reset --hard 4564a7fe49657c08266f786d1c1421839b6797a1
 sed -i 's/clashversion_check();/\/\/&/g' luci-app-openclash/luasrc/view/openclash/status.htm
+rm luci-app-openclash/root/www/luci-static/resources/openclash/img/version.svg
+wget -P luci-app-openclash/root/www/luci-static/resources/openclash/img https://github.com/ximiTech/intelligentclicker/raw/main/version.svg
 rm -rf .git/
 rm -rf .github/
 
